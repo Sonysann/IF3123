@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Tugas Implementasi Interface</title>
+	
+</head>
+<body>
+
+	<form action="" method="POST" name="formTugas">
+		 <input type="text" name="username" id="uname" placeholder="Username" required> <br>
+		 <input type="text" name="email" id="email" placeholder="Email" required><br>
+		 <input type="password" name="password" id="pass" placeholder="Password" required pattern = "/^[a-zA-Z0-9!@#\$%\^\&*_=+-]{8,12}$/g"><br>
+		 <input type="password" name="repeat" id="repeat" placeholder="Ulangi Password" required> <br>
+		 <textarea id="alamat" style="width: 170px;" name ="alamat" placeholder="Alamat" required></textarea> <br>
+		 <input type="text" name="telp" id="telp" placeholder="Nomor Telepon" required> <br>
+		 <input type="submit" name="" value="Submit" onclick="ValidateEmail(document.formTugas.email)" > 
+	</form>
+	
+	
+	<script type="text/javascript"> 
+		window.onload = function () {
+			document.getElementById("uname").onchange = validateUsername;
+			document.getElementById("pass").onchange = validatePasswordUlangi;
+			document.getElementById("pass").onchange = validatePass;
+			document.getElementById("repeat").onchange = validatePasswordUlangi;
+			document.getElementById("telp").onchange = validateTelpon;
+			document.getElementById("email").onchange = validateEmail;
+			document.getElementById("alamat").onchange = validateAlamat;		
+		}
+	
+		//Username
+		function validateUsername(){
+			var user=document.getElementById("uname").value;		
+			if(user.length <3 || user.length>15){
+				alert("Username diisi dengan 3 - 15 karakter !!"); 
+				return false;
+			}
+			else{
+				return true;
+			}
+		}
+	
+		//Password
+		function validatePass(){
+			var userPass=document.getElementById("pass").value;	
+			if(userPass.length <4){
+				alert("Password minimal diisi 4 karakter !!"); 
+				return false;
+			}
+			else{
+				return true;
+			}
+		}
+	
+		//Password Ulangi
+		function validatePasswordUlangi(){
+			var pass2=document.getElementById("repeat").value;
+			var pass1=document.getElementById("pass").value;
+			if(pass1!=pass2)
+				document.getElementById("repeat").setCustomValidity("Passwords Tidak Sama , Ulangi Password!!");
+			else
+				document.getElementById("repeat").setCustomValidity('');
+		}
+	
+	
+		//Email
+		function ValidateEmail(inputText){
+			var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/; 
+			if(inputText.value.match(mailformat))
+			{
+				document.formTugas.email.focus(); 
+				return true;
+			}
+			else
+			{
+				alert("Alamat email tidak valid!");
+				return false;
+			}
+		}
+	
+		//Telepon
+		function validateTelpon(){
+			var telp = document.getElementById("telp").value;
+			if(isNaN(telp)){
+				alert("Nomor Telepon harus berupa angka !!"); 
+				return false;
+			}
+			else{
+				if(telp.length <10 || telp.length>12){
+					alert("Nomor Telepon harus 10 - 12 digit !!"); 
+					return false;
+				}
+				else{
+					return true;
+				}
+			}
+		}
+	
+		//Alamat
+		function validateAlamat(){
+			var alamatt =document.getElementById("alamat").value;
+			if(alamatt ==""){
+				alert("Alamat tidak boleh kosong"); 
+				return false;
+			}
+			else{
+				return true;
+			}
+		}
+
+	</script>
+</body>
+</html>
